@@ -1,6 +1,6 @@
 class Node {
-  constructor(value) {
-    this.value = value;
+  constructor(data) {
+    this.data = data;
     this.next = null;
   }
 }
@@ -10,28 +10,64 @@ class LinkedList {
     this.head = null;
   }
 
-  addNodeToTail(value) {
-    const node = new Node(value);
+  addNodeToTail(data) {
+    const node = new Node(data);
     let tail = this.findTail();
     if (!tail) this.head = node;
     else tail.next = node;
+    console.log(`Node with a value of '${data}' has been added to the tail`);
   }
 
-  addNodeToHead(value) {
-    const node = new Node(value);
+  addNodeToHead(data) {
+    const node = new Node(data);
     if (!this.head) this.head = node;
     else {
       const prevHead = this.head;
       this.head = node;
       node.next = prevHead;
     }
+    console.log(`Node with a value of '${data}' has been added to the head`);
   }
 
-  findItem(value) {
+  removeFromHead() {
+    const oldHead = this.head;
+    this.head = this.head.next;
+    return oldHead;
+  }
+
+  removeTail() {
+    if (this.count() === 0) return null;
+    if (this.count() === 1) {
+      const removedNode = this.head;
+      this.head = null;
+      return removedNode;
+    }
+    let currentNode = this.head;
+    let previousNode;
+    while (currentNode.next) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+      console.log(`PREV: ${JSON.stringify(previousNode)} - CURRENT: ${JSON.stringify(currentNode)}`);
+    }
+    previousNode.next = null;
+    return currentNode;
+  }
+
+  count() {
+    let counter = 0;
+    let currentNode = this.head;
+    while (currentNode) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return counter;
+  }
+
+  findNode(value) {
     let currentNode = this.head;
     let isItemFound = false;
     while (currentNode) {
-      if (currentNode.value === value) {
+      if (currentNode.data === value) {
         isItemFound = true;
         currentNode = null;
       } else {
@@ -39,15 +75,16 @@ class LinkedList {
       }
     }
     console.log(`${value} was ${isItemFound ? "" : "not "}found in this list.`);
+    // return currentNode
   }
 
   findTail() {
-    let next = this.head;
-    if (!next) return null;
+    let current = this.head;
+    if (!current) return null;
     let prev;
-    while (next) {
-      prev = next;
-      next = next.next;
+    while (current) {
+      prev = current;
+      current = current.next;
     }
     return prev;
   }
@@ -55,7 +92,6 @@ class LinkedList {
   printLinkedList() {
     let current = this.head;
     while (current) {
-      console.log(current.value);
       current = current.next;
     }
   }
@@ -67,5 +103,5 @@ ll.addNodeToTail(2);
 ll.addNodeToTail(3);
 ll.addNodeToHead(4);
 ll.printLinkedList();
-ll.findItem(5);
-ll.findItem(4);
+ll.removeTail();
+ll.printLinkedList();
