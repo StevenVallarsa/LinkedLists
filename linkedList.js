@@ -97,11 +97,34 @@ class LinkedList {
   }
 }
 
-const ll = new LinkedList();
-ll.addNodeToTail(1);
-ll.addNodeToTail(2);
-ll.addNodeToTail(3);
-ll.addNodeToHead(4);
-ll.printLinkedList();
-ll.removeTail();
-ll.printLinkedList();
+// const ll = new LinkedList();
+// ll.addNodeToTail(1);
+// ll.addNodeToTail(2);
+// ll.addNodeToTail(3);
+// ll.addNodeToHead(4);
+// ll.printLinkedList();
+// ll.removeTail();
+// ll.printLinkedList();
+
+function fiboMemo(n, memo = { 1: 1, 2: 1 }) {
+  if (n in memo) return memo[n];
+
+  const result = fiboMemo(n - 1, memo) + fiboMemo(n - 2, memo);
+  memo[n] = result;
+  return result;
+}
+
+function fiboIteration(n) {
+  if (n <= 2) return 1;
+
+  let last1 = 1;
+  let last2 = 1;
+
+  for (let i = 2; i < n; i++) {
+    const temp = last1;
+    last1 = last2 + temp;
+    last2 = temp;
+  }
+
+  return last1;
+}
