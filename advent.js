@@ -4,7 +4,6 @@ function findAnswer01(numbers) {
   let total = 0;
   numbers.forEach(line => {
     line = replaceNamesWithNumbers(line);
-    // console.log(line);
     let startNumber = 0;
     let endNumber = 0;
     let left = false;
@@ -20,7 +19,6 @@ function findAnswer01(numbers) {
       }
       if (left & right) break;
     }
-    // console.log(String(startNumber) + String(endNumber));
     total += Number(String(startNumber) + String(endNumber));
   });
   console.log(total);
@@ -54,12 +52,3 @@ function replaceNamesWithNumbers(input) {
 }
 
 findAnswer01(input.split("\n"));
-// findAnswer01(
-//   `kjrqmzv9mmtxhgvsevenhvq7
-// four2tszbgmxpbvninebxns6nineqbqzgjpmpqr
-// rkzlnmzgnk91zckqprrptnthreefourtwo
-// fouronevzkbnzm6seven47
-// zphgdcznqsm2
-// 4gjnmxtrbflgp71
-// 4sqvv1cnpn`.split("\n")
-// );
