@@ -128,3 +128,20 @@ function fiboIteration(n) {
 
   return last1;
 }
+
+// BINARY SEARCH
+
+function binarySearch(arr, target, start, end) {
+  if (start > end) return false;
+
+  const midPoint = Math.floor((start + end) / 2);
+
+  if (target === arr[midPoint]) return true;
+
+  if (target > arr[midPoint]) return binarySearch(arr, target, midPoint + 1, end);
+  else return binarySearch(arr, target, start, midPoint - 1);
+}
+
+// [1, 2, 3, 4, 5], 5
+
+console.log(binarySearch([1, 2, 3, 4, 5], 7, 0, 5));
